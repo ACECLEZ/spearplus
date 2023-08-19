@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Hwa Chong Institution : Integrated e-Message Board</title>
+    <link href="https://iemb.hci.edu.sg/Content/iemb_global.css?t=1.0" rel="stylesheet" type="text/css">
+    <link href="https://iemb.hci.edu.sg/Content/iemb_login.css?t=1.0" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="https://iemb.hci.edu.sg/Scripts/jquery-1.9.1.min.js?t=1.1"></script>
+    <script type="text/javascript">
+        //document.onmousedown = disableclick; status = "Right Click Disabled"; function disableclick(event) { if (event.button == 2) { alert(status); return false; } }
+
+        function init() {
+            var message = "";
+            if (message) {
+                alert(message);
+            }
+        }
+    </script>
+
+    <script type="text/javascript">
+        //window.oncontextmenu = function () {
+        //    return false;
+        //}
+        //$(document).keydown(function (event) {
+        //    if (event.keyCode == 123) {
+        //        return false;
+        //    }
+        //});
+        $(document).keydown(function (event) {
+            if (event.keyCode == 13) {
+                $('#submitbut').click();
+            }
+        });
+
+               
+        $(document).ready(function () {
+            ////debugger
+            $('#submitbut').on('click', function (event) {
+                if ($('#UserName').val() == "") {
+                    alert('Username cannot be left blank');
+                    $('#UserName').focus();
+                    return false;
+                }
+
+                if ($('#Password').val() == "") {
+                    alert('Password cannot be left blank');
+                    $('#Password').focus();
+                    return false;
+                }
+                return true;
+                
+                
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            const triggerCheckbox = document.getElementById('triggerScript');
+            const userScriptCode = `
+                // Paste your user script code here
+            `;
+
+            triggerCheckbox.addEventListener('change', function() {
+                if (this.checked) {
+                    localStorage.setItem('runUserScript', 'true');
+                    executeUserScript();
+                } else {
+                    localStorage.removeItem('runUserScript');
+                }
+            });
+
+            function executeUserScript() {
+                const shouldRunUserScript = localStorage.getItem('runUserScript') === 'true';
+                if (shouldRunUserScript) {
+                    const script = document.createElement('script');
+                    script.textContent = userScriptCode;
+                    document.body.appendChild(script);
+                }
+            }
+
+            executeUserScript();
+        });
+    </script>
+</head>
+
+<body onload="init();">
+    <img src="https://iemb.hci.edu.sg/Images/iemb_bg.jpg?t=1.0" class="smops_bg">
+    <div id="container">
+        <div class="login-page" style="float: right;">
+            <div class="form">
+                <div>
+                    <div><img src="https://iemb.hci.edu.sg/Images/hwa_chong_login.png?t=1.0" width="70" height="66"></div>
+                </div>
+                <div class="com_name">
+                    Integrated e-Message Board
+                </div>
+                <div class="gap10"></div>
+                        
+                 <form method="post" action="https://iemb.hci.edu.sg/home/logincheck" autocomplete="off" id="loginForm">
+                  
+                   <input type="text" id="UserName" name="UserName" placeholder="Username" autofocus="">
+                    <input type="password" id="Password" name="Password" placeholder="Password">
+                     <input name="__RequestVerificationToken" type="hidden" value="_fPTEKS71mCce7DWc6sp4iVkzgUKxPoAJs4el66Z1pJqwaVAOYF9tm9eZ-zLNw-Gf6sHgE3SbqD83mPTdXU3DmANnjzRKaNjf98trGuPBKA1">
+                      <button type="submit" name="submitbut" id="submitbut" value="Submit">Login</button>
+                 </form>
+                    <div class="read_mess_bg" style="display:block;">
+                        <i class="fa fa-info-circle" style="padding-right:5px;"></i><strong>Website best viewed and supported for last two versions of IE, FireFox and Chrome browser</strong>
+                    </div>
+            </div>
+        </div>
+
+        <!-- Floating checkbox -->
+        <div id="floatingCheckbox" style="position: fixed; bottom: 20px; right: 20px;">
+            <label for="triggerScript">Run UserScript</label>
+            <input type="checkbox" id="triggerScript">
+        </div>
+
+        <!-- Footer section -->
+        <footer id="footerDiv">
+            <div class="footer_wrapper">
+                Copyright ©2016 Integrated e-Message Board, All Rights Reserved.
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
